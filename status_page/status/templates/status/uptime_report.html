@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uptime Report</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">  </head>
+<body class="container mt-5">
+
+    <h1 class="text-center">Uptime Report</h1>
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Date</th>
+                {% for service_name in report_data.values.0 %}  <th>{{ service_name }} (Operational)</th>
+                <th>{{ service_name }} (Down)</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for date, service_data in report_data.items %}
+            <tr>
+                <td>{{ date }}</td>
+                {% for service_name, status_counts in service_data.items %}
+                <td>{{ status_counts.operational }}</td>
+                <td>{{ status_counts.downtime }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
